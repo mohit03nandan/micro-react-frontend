@@ -1,5 +1,6 @@
 import React from 'react'
 import Category from '../../components/Category/Category'
+import Button from '../../components/Button/Button'
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
               <Category/>
 
           </div> 
-         world
+         <Button/>
     </div>
   )
 }
