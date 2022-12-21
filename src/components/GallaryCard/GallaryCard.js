@@ -11,7 +11,7 @@ const GallaryCard = () => {
     let sortByDate;
     let filterByLike;
     let shuffle;
-    // let imageId;
+    
     const queryParams = new URLSearchParams(window.location.search);
     const queryStringDate = queryParams.get("sortByDate");
     const queryStringLike = queryParams.get("filterByLike");
