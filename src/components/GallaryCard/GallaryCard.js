@@ -4,7 +4,7 @@ import { useParams} from "react-router-dom";
 
 import { getGallery } from "../../api/discover";
 
-// import { setFavoriteImage } from "../../api/discover";
+import { setFavoriteImage } from "../../api/discover";
 
 const GallaryCard = () => {
     const { categoryName } = useParams();
@@ -22,7 +22,7 @@ const GallaryCard = () => {
     else if(queryshuffle) shuffle = queryshuffle;
     
 
-     
+    const [isActive, setActive] = useState();
     const [galleryList, setGalleryList] = useState([
         {
             url: "https://images.unsplash.com/photo-1671210681777-4b7d2377ef69?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
@@ -32,33 +32,21 @@ const GallaryCard = () => {
     ]);
 
    
-//   const [isActive, setIsActive] = useState(false);
-
-    // const [favorites, setFavorite] = useState("");
 
     async function fetchGallery(categoryName ,sortByLike, sortByDate,shuffle) {
         const galleryDetails = await getGallery( categoryName,  sortByLike,sortByDate,shuffle);
         setGalleryList(galleryDetails);
     }
 
-    // async function fetchfavouriteimage(imageId) {
-    //     const favouriteimg = await setFavoriteImage( imageId);
-    //     setFavorite(favouriteimg);
-    // }
-
-
-    // const handleClick = () => {
-        
-    //   };
+    const toggleClass = () => {
+        setActive(setFavoriteImage);
+      };
 
 
     useEffect(() => {
         fetchGallery(categoryName, filterByLike, sortByDate,shuffle);
     }, [categoryName, sortByDate, filterByLike,shuffle]);
 
-    // const handleClick=   useEffect(() => {
-    //     fetchfavouriteimage(imageId);
-    // }, [imageId]);
 
   return (
    <>
@@ -67,7 +55,7 @@ const GallaryCard = () => {
            <div>
                 {image.name} 
                <img className="w-50 h-70 mt-5 ms-5 rounded-5 " src={image.imageLink} alt="" />
-               <div  style={{ color: image.likes ? 'red' : 'black', }}  >
+               <div   onClick={toggleClass}   style={{ color: isActive ? 'red' : 'black', }} >
                  <i class="bi bi-heart"></i>
                  
                </div>
